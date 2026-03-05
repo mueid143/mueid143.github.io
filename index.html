@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>LinkShare BD</title>
+<title>Link Promote BD</title>
+<style>
+body{
+font-family:sans-serif;
+text-align:center;
+background:#f5f5f5;
+}
+
+.box{
+background:white;
+padding:20px;
+width:300px;
+margin:auto;
+margin-top:100px;
+border-radius:10px;
+}
+
+</style>
 </head>
 
-<body style="text-align:center;font-family:sans-serif">
+<body>
 
-<h2>Share Your Link</h2>
+<div class="box">
 
-<input id="linkInput" type="text" placeholder="Paste your link here">
-<button onclick="addLink()">Share</button>
+<h2>Promote Your Link</h2>
 
-<div id="linkList"></div>
+<input id="linkInput" placeholder="Paste your link">
+<button onclick="addLink()">Submit</button>
+
+<div id="links"></div>
+
+</div>
 
 <script>
 function addLink(){
-let link = document.getElementById("linkInput").value;
 
-let a = document.createElement("a");
-a.href = link;
-a.innerText = link;
-a.target = "_blank";
+let link=document.getElementById("linkInput").value;
 
-let br = document.createElement("br");
+let a=document.createElement("a");
+a.href=link;
+a.innerText=link;
+a.target="_blank";
 
-document.getElementById("linkList").appendChild(a);
-document.getElementById("linkList").appendChild(br);
+let br=document.createElement("br");
+
+document.getElementById("links").appendChild(a);
+document.getElementById("links").appendChild(br);
+
 }
 </script>
 
