@@ -14,10 +14,10 @@ text-align:center;
 
 .box{
 background:white;
-width:400px;
+width:420px;
 padding:25px;
 margin:auto;
-margin-top:100px;
+margin-top:80px;
 border-radius:12px;
 }
 
@@ -31,16 +31,28 @@ padding:10px;
 background:#007bff;
 color:white;
 border:none;
+cursor:pointer;
 }
 
 .links{
 margin-top:20px;
 }
 
+.card{
+background:#f5f5f5;
+padding:10px;
+margin:8px;
+border-radius:6px;
+}
+
 a{
-display:block;
-margin:5px;
 color:#007bff;
+}
+
+.delete{
+color:red;
+cursor:pointer;
+margin-left:10px;
 }
 
 </style>
@@ -51,9 +63,9 @@ color:#007bff;
 
 <div class="box">
 
-<h2>Promote Your Link</h2>
+<h2>🚀 Promote Your Link</h2>
 
-<input id="linkInput" placeholder="Paste your link here">
+<input id="linkInput" placeholder="Paste your link">
 
 <button onclick="addLink()">Submit</button>
 
@@ -63,21 +75,61 @@ color:#007bff;
 
 <script>
 
-function addLink(){
+let links=JSON.parse(localStorage.getItem("links"))||[];
 
-let link=document.getElementById("linkInput").value;
+function showLinks(){
 
-let a=document.createElement("a");
+let container=document.getElementById("links");
 
-a.href=link;
+container.innerHTML="";
 
-a.innerText=link;
+links.forEach((link,index)=>{
 
-a.target="_blank";
+container.innerHTML+=`
 
-document.getElementById("links").appendChild(a);
+<div class="card">
+
+<a href="${link}" target="_blank">${link}</a>
+
+<span class="delete" onclick="deleteLink(${index})">❌</span>
+
+</div>
+
+`;
+
+});
 
 }
+
+function addLink(){
+
+let input=document.getElementById("linkInput");
+
+let link=input.value;
+
+if(link=="") return;
+
+links.push(link);
+
+localStorage.setItem("links",JSON.stringify(links));
+
+input.value="";
+
+showLinks();
+
+}
+
+function deleteLink(i){
+
+links.splice(i,1);
+
+localStorage.setItem("links",JSON.stringify(links));
+
+showLinks();
+
+}
+
+showLinks();
 
 </script>
 
