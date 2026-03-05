@@ -1,9 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LinkShare BD</title>
+</head>
+
+<body style="text-align:center;font-family:sans-serif">
+
+<h2>Share Your Link</h2>
+
+<input id="linkInput" type="text" placeholder="Paste your link here">
+<button onclick="addLink()">Share</button>
+
 <div id="linkList"></div>
 
 <script>
 function addLink(){
 let link = document.getElementById("linkInput").value;
-let list = document.getElementById("linkList");
 
 let a = document.createElement("a");
 a.href = link;
@@ -12,7 +24,10 @@ a.target = "_blank";
 
 let br = document.createElement("br");
 
-list.appendChild(a);
-list.appendChild(br);
+document.getElementById("linkList").appendChild(a);
+document.getElementById("linkList").appendChild(br);
 }
 </script>
+
+</body>
+</html>
