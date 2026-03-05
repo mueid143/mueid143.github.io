@@ -1,138 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Link Promote BD</title>
-
+<title>LinkShare BD</title>
 <style>
-
 body{
-font-family:Arial;
-background:linear-gradient(120deg,#4facfe,#00f2fe);
-text-align:center;
+font-family: Arial;
+background: linear-gradient(120deg,#4facfe,#00f2fe);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .box{
 background:white;
-width:420px;
-padding:25px;
-margin:auto;
-margin-top:80px;
-border-radius:12px;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+text-align:center;
+width:350px;
 }
 
 input{
 width:70%;
 padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
-padding:10px;
+padding:10px 15px;
 background:#007bff;
 color:white;
 border:none;
+border-radius:5px;
 cursor:pointer;
 }
 
-.links{
+button:hover{
+background:#0056b3;
+}
+
+.link-list{
 margin-top:20px;
 }
-
-.card{
-background:#f5f5f5;
-padding:10px;
-margin:8px;
-border-radius:6px;
-}
-
-a{
-color:#007bff;
-}
-
-.delete{
-color:red;
-cursor:pointer;
-margin-left:10px;
-}
-
 </style>
-
 </head>
 
 <body>
 
 <div class="box">
 
-<h2>🚀 Promote Your Link</h2>
+<h2>🔗 LinkShare BD</h2>
 
 <input id="linkInput" placeholder="Paste your link">
+<button onclick="addLink()">Share</button>
 
-<button onclick="addLink()">Submit</button>
-
-<div class="links" id="links"></div>
+<div class="link-list" id="links"></div>
 
 </div>
 
 <script>
 
-let links=JSON.parse(localStorage.getItem("links"))||[];
-
-function showLinks(){
-
-let container=document.getElementById("links");
-
-container.innerHTML="";
-
-links.forEach((link,index)=>{
-
-container.innerHTML+=`
-
-<div class="card">
-
-<a href="${link}" target="_blank">${link}</a>
-
-<span class="delete" onclick="deleteLink(${index})">❌</span>
-
-</div>
-
-`;
-
-});
-
-}
-
 function addLink(){
 
-let input=document.getElementById("linkInput");
+let link = document.getElementById("linkInput").value;
 
-let link=input.value;
-
-if(link=="") return;
-
-links.push(link);
-
-localStorage.setItem("links",JSON.stringify(links));
-
-input.value="";
-
-showLinks();
-
+if(link === ""){
+alert("Enter a link");
+return;
 }
 
-function deleteLink(i){
+let div = document.createElement("div");
 
-links.splice(i,1);
+div.innerHTML = "<a href='"+link+"' target='_blank'>"+link+"</a>";
 
-localStorage.setItem("links",JSON.stringify(links));
+document.getElementById("links").appendChild(div);
 
-showLinks();
+document.getElementById("linkInput").value="";
 
 }
-
-showLinks();
 
 </script>
 
 </body>
-
 </html>
