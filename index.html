@@ -2,30 +2,38 @@
 <html>
 <head>
 <title>LinkShare BD</title>
+
 <style>
+
 body{
 font-family: Arial;
 background: linear-gradient(120deg,#4facfe,#00f2fe);
-height:100vh;
+margin:0;
+padding:0;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
+height:100vh;
 }
 
 .box{
 background:white;
 padding:30px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
+border-radius:12px;
+width:400px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 text-align:center;
-width:350px;
+}
+
+h2{
+margin-bottom:20px;
 }
 
 input{
 width:70%;
 padding:10px;
 border:1px solid #ccc;
-border-radius:5px;
+border-radius:6px;
 }
 
 button{
@@ -33,7 +41,7 @@ padding:10px 15px;
 background:#007bff;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
 }
 
@@ -41,10 +49,20 @@ button:hover{
 background:#0056b3;
 }
 
-.link-list{
-margin-top:20px;
+.link{
+margin-top:10px;
+padding:10px;
+background:#f2f2f2;
+border-radius:5px;
 }
+
+a{
+text-decoration:none;
+color:#007bff;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -56,30 +74,70 @@ margin-top:20px;
 <input id="linkInput" placeholder="Paste your link">
 <button onclick="addLink()">Share</button>
 
-<div class="link-list" id="links"></div>
+<div id="links"></div>
 
 </div>
 
 <script>
 
-function addLink(){
+let links = JSON.parse(localStorage.getItem("links")) || [];
 
-let link = document.getElementById("linkInput").value;
+function showLinks(){
 
-if(link === ""){
-alert("Enter a link");
-return;
-}
+let container = document.getElementById("links");
+
+container.innerHTML="";
+
+links.forEach((item,index)=>{
 
 let div = document.createElement("div");
 
-div.innerHTML = "<a href='"+link+"' target='_blank'>"+link+"</a>";
+div.className="link";
 
-document.getElementById("links").appendChild(div);
+div.innerHTML = `
+<a href="${item.url}" target="_blank" onclick="countClick(${index})">${item.url}</a>
+<br>
+Clicks: ${item.clicks}
+`;
 
-document.getElementById("linkInput").value="";
+container.appendChild(div);
+
+});
 
 }
+
+function addLink(){
+
+let input = document.getElementById("linkInput");
+
+let url = input.value;
+
+if(url===""){
+alert("Enter link");
+return;
+}
+
+links.push({url:url,clicks:0});
+
+localStorage.setItem("links",JSON.stringify(links));
+
+input.value="";
+
+showLinks();
+
+}
+
+function countClick(index){
+
+links[index].clicks++;
+
+localStorage.setItem("links",JSON.stringify(links));
+
+showLinks();
+
+}
+
+showLinks();
 
 </script>
 
