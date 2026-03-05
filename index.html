@@ -1,130 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>LinkShare BD</title>
-
-<style>
-
-body{
-font-family: Arial;
-background: linear-gradient(135deg,#4facfe,#00f2fe);
-margin:0;
-padding:0;
-}
-
-.header{
-background:white;
-padding:15px;
-font-size:22px;
-font-weight:bold;
-text-align:center;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
-}
-
-.container{
-max-width:500px;
-margin:40px auto;
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-input{
-width:75%;
-padding:10px;
-border:1px solid #ccc;
-border-radius:5px;
-}
-
-button{
-padding:10px 15px;
-background:#007bff;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-button:hover{
-background:#0056b3;
-}
-
-.link{
-display:block;
-padding:10px;
-margin-top:10px;
-background:#f2f2f2;
-border-radius:5px;
-text-decoration:none;
-color:#333;
-}
-
-.link:hover{
-background:#e0e0e0;
-}
-
-.footer{
-text-align:center;
-margin-top:30px;
-color:white;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="header">
-🔗 LinkShare BD
-</div>
-
-<div class="container">
-
-<h3>Share Your Link</h3>
-
-<input id="linkInput" placeholder="Paste your link here">
-
-<button onclick="addLink()">Share</button>
-
 <div id="linkList"></div>
 
-</div>
-
-<div class="footer">
-Website by Mueid
-</div>
-
 <script>
-
 function addLink(){
+let link = document.getElementById("linkInput").value;
+let list = document.getElementById("linkList");
 
-let link=document.getElementById("linkInput").value;
+let a = document.createElement("a");
+a.href = link;
+a.innerText = link;
+a.target = "_blank";
 
-if(link==""){
-alert("Enter a link first!");
-return;
+let br = document.createElement("br");
+
+list.appendChild(a);
+list.appendChild(br);
 }
-
-let a=document.createElement("a");
-
-a.href=link;
-
-a.target="_blank";
-
-a.className="link";
-
-a.innerText=link;
-
-document.getElementById("linkList").appendChild(a);
-
-document.getElementById("linkInput").value="";
-
-}
-
 </script>
-
-</body>
-</html>
