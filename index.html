@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Link Promote BD</title>
+
 <style>
+
 body{
-font-family:sans-serif;
+font-family:Arial;
+background:linear-gradient(120deg,#4facfe,#00f2fe);
 text-align:center;
-background:#f5f5f5;
 }
 
 .box{
 background:white;
-padding:20px;
-width:300px;
+width:400px;
+padding:25px;
 margin:auto;
 margin-top:100px;
-border-radius:10px;
+border-radius:12px;
+}
+
+input{
+width:70%;
+padding:10px;
+}
+
+button{
+padding:10px;
+background:#007bff;
+color:white;
+border:none;
+}
+
+.links{
+margin-top:20px;
+}
+
+a{
+display:block;
+margin:5px;
+color:#007bff;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -27,30 +53,34 @@ border-radius:10px;
 
 <h2>Promote Your Link</h2>
 
-<input id="linkInput" placeholder="Paste your link">
+<input id="linkInput" placeholder="Paste your link here">
+
 <button onclick="addLink()">Submit</button>
 
-<div id="links"></div>
+<div class="links" id="links"></div>
 
 </div>
 
 <script>
+
 function addLink(){
 
 let link=document.getElementById("linkInput").value;
 
 let a=document.createElement("a");
+
 a.href=link;
+
 a.innerText=link;
+
 a.target="_blank";
 
-let br=document.createElement("br");
-
 document.getElementById("links").appendChild(a);
-document.getElementById("links").appendChild(br);
 
 }
+
 </script>
 
 </body>
+
 </html>
